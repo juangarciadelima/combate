@@ -1,7 +1,17 @@
 function combateAtaque(ataque, defensor) {
 
-    let coisa = (ataque.ataque + ataque.arma.bonus - defensor.defesa - defensor.escudo.bonus)
-    if (defensor > ataque) {
+    let bonusArma = 0
+    if (ataque.arma !== null) {
+        bonusArma = ataque.arma.bonus
+    }
+
+    let bonusEscudo = 0
+    if (defensor.escudo !== null) {
+        bonusEscudo = defensor.escudo.bonus
+    }
+
+    let coisa = (ataque.ataque + bonusArma - defensor.defesa - bonusEscudo)
+    if (coisa < 0) {
         return 0
     }
 
@@ -26,12 +36,12 @@ function VerificaSeDeuCerto(cenario, resultadoEsperado, ataque, defensor) {
 
 
 
-VerificaSeDeuCerto('00. ', 1, { ataque: 0, arma: { bonus: 1 } }, defensor = { defesa: 0, escudo: { bonus: null } })
-VerificaSeDeuCerto('01. ', 8, { ataque: 9, arma: { bonus: null } }, { defesa: 1, escudo: { bonus: null } })
-VerificaSeDeuCerto('02. ', 0, { ataque: 1, arma: { bonus: null } }, { defesa: 9, escudo: { bonus: null } })
-VerificaSeDeuCerto('03. ', 2, { ataque: 0, arma: { bonus: 2 } }, { defesa: 0, escudo: { bonus: null } })
-VerificaSeDeuCerto('04.', 5, { ataque: 3, arma: { bonus: 2 } }, { defesa: 0, escudo: { bonus: null } })
-VerificaSeDeuCerto('05. ', 4, { ataque: 3, arma: { bonus: 2 } }, { defesa: 1, escudo: { bonus: null } })
+VerificaSeDeuCerto('00. ', 1, { ataque: 0, arma: {bonus : 1} }, { defesa: 0, escudo: null })
+VerificaSeDeuCerto('01. ', 8, { ataque: 9, arma: null }, { defesa: 1, escudo: null })
+VerificaSeDeuCerto('02. ', 0, { ataque: 1, arma: null }, { defesa: 9, escudo: null })
+VerificaSeDeuCerto('03. ', 2, { ataque: 0, arma: {bonus : 2} }, { defesa: 0, escudo: null })
+VerificaSeDeuCerto('04. ', 5, { ataque: 3, arma: { bonus: 2 } }, { defesa: 0, escudo: null })
+VerificaSeDeuCerto('05. ', 4, { ataque: 3, arma: { bonus: 2 } }, { defesa: 1, escudo: null })
 VerificaSeDeuCerto('06. ', 3, { ataque: 3, arma: { bonus: 2 } }, { defesa: 1, escudo: { bonus: 1 } })
 VerificaSeDeuCerto('07. ', 2, { ataque: 3, arma: { bonus: 2 } }, { defesa: 1, escudo: { bonus: 2 } })
 VerificaSeDeuCerto('08. ', 0, { ataque: 3, arma: { bonus: 2 } }, { defesa: 1, escudo: { bonus: 5 } })
